@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import List, Tuple
 
-GRID_SIZE = 20
+GRID_SIZE = 15
 
 
 class Direction(Enum):
