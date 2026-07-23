@@ -95,8 +95,6 @@ class SnakeEnvironment:
             "apple": {"x": self.apple[0], "y": self.apple[1]},
             "direction": self.direction.name,
             "score": self.score,
-            "level": self.score // 50 + 1,
-            "stars": min(self.score // 50 + 1, 3),
             "gameOver": self.game_over,
         }
 

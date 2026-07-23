@@ -13,8 +13,6 @@ function buildEmptyState(): GameState {
     apple: { x: 0, y: 0 },
     direction: "RIGHT",
     score: 0,
-    level: 1,
-    stars: 1,
     gameOver: false,
   };
 }

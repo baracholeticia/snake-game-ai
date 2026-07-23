@@ -12,8 +12,6 @@ export interface GameState {
   apple: Position;
   direction: Direction;
   score: number;
-  level: number;
-  stars: number;
   gameOver: boolean;
 }
 
