@@ -4,6 +4,7 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 from agents.heuristic_agent import HeuristicAgent
+from agents.qlearning_agent import QLearningAgent
 from core.game_loop import GameLoop
 
 app = FastAPI()
@@ -30,6 +31,7 @@ class ManualController:
 AGENT_REGISTRY = {
     "manual": ManualController,
     "heuristic": HeuristicAgent,
+    "qlearning": QLearningAgent,
 }
 DEFAULT_AGENT = "manual"
 
