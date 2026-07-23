@@ -1,9 +1,11 @@
 import json
+import os
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 from agents.heuristic_agent import HeuristicAgent
+from agents.genetic_agent import GeneticAgent, GeneticAlgorithm
 from core.game_loop import GameLoop
 
 app = FastAPI()
@@ -27,10 +29,25 @@ class ManualController:
         self.next_action = "straight"
         return action
 
+GENETIC_POLICY_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "agents", "best_snake_policy.npy"
+)
+try:
+    GENETIC_POLICY = GeneticAlgorithm.load_policy(GENETIC_POLICY_PATH)
+except FileNotFoundError:
+    GENETIC_POLICY = None
+    print(
+        f"[aviso] {GENETIC_POLICY_PATH} não encontrado — "
+        "agente 'genetic' ficará indisponível até você treinar (python genetic_agent.py)."
+    )
+
 AGENT_REGISTRY = {
     "manual": ManualController,
     "heuristic": HeuristicAgent,
 }
+if GENETIC_POLICY is not None:
+    AGENT_REGISTRY["genetic"] = lambda: GeneticAgent(GENETIC_POLICY)
+
 DEFAULT_AGENT = "manual"
 
 
