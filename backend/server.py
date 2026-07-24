@@ -5,6 +5,7 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 
 from agents.heuristic_agent import HeuristicAgent
+from agents.qlearning_agent import QLearningAgent
 from agents.genetic_agent import GeneticAgent, GeneticAlgorithm
 from core.game_loop import GameLoop
 
@@ -44,6 +45,7 @@ except FileNotFoundError:
 AGENT_REGISTRY = {
     "manual": ManualController,
     "heuristic": HeuristicAgent,
+    "qlearning": QLearningAgent,
 }
 if GENETIC_POLICY is not None:
     AGENT_REGISTRY["genetic"] = lambda: GeneticAgent(GENETIC_POLICY)
